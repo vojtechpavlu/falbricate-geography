@@ -1,18 +1,23 @@
-import { GeneratedValue, randomItemFromArray, ValueGenerator, ValueGeneratorConfig } from '@falbricate/base';
+import {
+  GeneratedValue,
+  randomItemFromArray,
+  ValueGenerator,
+  ValueGeneratorConfig,
+} from '@falbricate/base';
 import { Country, getGeography } from '../data';
 
-export type CountryAs = 'object' | 'name' | 'abbr' | 'capital'
+export type CountryAs = 'object' | 'name' | 'abbr' | 'capital';
 
 export type RandomCountryConfig = {
   countries: string | string[];
   as?: CountryAs;
-} & ValueGeneratorConfig & any;
+} & ValueGeneratorConfig &
+  any;
 
 export class RandomCountryGenerator extends ValueGenerator<
   GeneratedValue,
   RandomCountryConfig
 > {
-
   private readonly countries: Country[];
 
   constructor(config: RandomCountryConfig) {
@@ -37,8 +42,8 @@ export class RandomCountryGenerator extends ValueGenerator<
     } else {
       throw new Error(
         `Unexpected type of countries specification: ` +
-        `'${this.config.countries}'`
-      )
+          `'${this.config.countries}'`,
+      );
     }
   }
 
@@ -56,7 +61,9 @@ export class RandomCountryGenerator extends ValueGenerator<
         return country.capital;
 
       default:
-        throw new Error(`Unknown type of country property: '${this.config.as}'`);
+        throw new Error(
+          `Unknown type of country property: '${this.config.as}'`,
+        );
     }
   };
 }

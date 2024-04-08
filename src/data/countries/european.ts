@@ -8,7 +8,12 @@ export const EUROPEAN_COUNTRIES: Country[] = [
   { type: 'country', abbr: 'az', name: 'Azerbaijan', capital: 'Baku' },
   { type: 'country', abbr: 'by', name: 'Belarus', capital: 'Minsk' },
   { type: 'country', abbr: 'be', name: 'Belgium', capital: 'Brussels' },
-  { type: 'country', abbr: 'ba', name: 'Bosnia and Herzegovina', capital: 'Sarajevo' },
+  {
+    type: 'country',
+    abbr: 'ba',
+    name: 'Bosnia and Herzegovina',
+    capital: 'Sarajevo',
+  },
   { type: 'country', abbr: 'bg', name: 'Bulgaria', capital: 'Sofia' },
   { type: 'country', abbr: 'hr', name: 'Croatia', capital: 'Zagreb' },
   { type: 'country', abbr: 'cy', name: 'Cyprus', capital: 'Nicosia' },
@@ -28,7 +33,7 @@ export const EUROPEAN_COUNTRIES: Country[] = [
   { type: 'country', abbr: 'li', name: 'Liechtenstein', capital: 'Vaduz' },
   { type: 'country', abbr: 'lt', name: 'Lithuania', capital: 'Vilnius' },
   { type: 'country', abbr: 'lu', name: 'Luxembourg', capital: 'Luxembourg' },
-  { type: 'country', abbr: 'mt', name: 'Malta', capital: 'St. Paul\'s Bay' },
+  { type: 'country', abbr: 'mt', name: 'Malta', capital: "St. Paul's Bay" },
   { type: 'country', abbr: 'md', name: 'Moldova', capital: 'Chisinau' },
   { type: 'country', abbr: 'mc', name: 'Monaco', capital: 'Monaco' },
   { type: 'country', abbr: 'me', name: 'Montenegro', capital: 'Podgorica' },
@@ -49,5 +54,5 @@ export const EUROPEAN_COUNTRIES: Country[] = [
   { type: 'country', abbr: 'tr', name: 'Turkey', capital: 'Ankara' },
   { type: 'country', abbr: 'ua', name: 'Ukraine', capital: 'Kyiv' },
   { type: 'country', abbr: 'uk', name: 'United Kingdom', capital: 'London' },
-  { type: 'country', abbr: 'va', name: 'Vatican', capital: 'Vatican City' }
+  { type: 'country', abbr: 'va', name: 'Vatican', capital: 'Vatican City' },
 ];

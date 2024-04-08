@@ -1,4 +1,4 @@
-import {Country, GeographyElement, NamedGeography, Region} from "./base";
+import { Country, GeographyElement, NamedGeography, Region } from './base';
 import { EUROPEAN_COUNTRIES } from './countries';
 import { EUROPEAN_REGIONS } from './regions';
 
@@ -16,24 +16,26 @@ const REGISTRY: GeographyRegistry = {};
  */
 export const hasGeographyAbbreviation = (abbr: string): boolean => {
   return allGeographyAbbreviations().includes(abbr);
-}
+};
 
 export const allGeographyAbbreviations = (): string[] => {
-  return Object.keys(REGISTRY)
-}
+  return Object.keys(REGISTRY);
+};
 
 export const addGeography = (geography: GeographyElement) => {
   if (allGeographyAbbreviations().includes(geography.abbr)) {
-    throw new Error(`Geography region with abbreviation '${geography.abbr}' already exists`);
+    throw new Error(
+      `Geography region with abbreviation '${geography.abbr}' already exists`,
+    );
   }
 
   if (geography.type === 'region') {
-    geography = geography as Region
+    geography = geography as Region;
     if (!geography.subs || !Array.isArray(geography.subs)) {
       throw new Error(`Region's subregions must be a non-empty array`);
     }
   } else if (geography.type === 'country') {
-    geography = geography as Country
+    geography = geography as Country;
     if (!geography.capital) {
       throw new Error(`Country has to have a capital city assigned`);
     }
@@ -56,13 +58,13 @@ export const getGeography = (abbreviation: string): Country[] => {
     region.subs
       .map((subregion) => getGeography(subregion))
       .map((subregion) => {
-        return subregion
+        return subregion;
       })
       .forEach((subregion) => {
         subregion.forEach((country) => result.push(country));
-      })
+      });
 
-    return [...new Set(result)]
+    return [...new Set(result)];
   } else if (geography.type === 'country') {
     const country = geography as Country;
     return [country];
@@ -76,5 +78,5 @@ export const getGeography = (abbreviation: string): Country[] => {
   ...EUROPEAN_COUNTRIES,
 
   // Register Regions
-  ...EUROPEAN_REGIONS
+  ...EUROPEAN_REGIONS,
 ].forEach((region) => addGeography(region));
