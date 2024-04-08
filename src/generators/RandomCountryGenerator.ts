@@ -4,8 +4,8 @@ import { Country, getGeography } from '../data';
 export type CountryAs = 'object' | 'name' | 'abbr' | 'capital'
 
 export type RandomCountryConfig = {
-  countries: string;
-  as: CountryAs;
+  countries: string | string[];
+  as?: CountryAs;
 } & ValueGeneratorConfig & any;
 
 export class RandomCountryGenerator extends ValueGenerator<
@@ -13,31 +13,50 @@ export class RandomCountryGenerator extends ValueGenerator<
   RandomCountryConfig
 > {
 
-  private readonly countries: Country[]
+  private readonly countries: Country[];
 
   constructor(config: RandomCountryConfig) {
     if (!config.countries) {
-      throw new Error(`Property 'countries' is required`)
+      throw new Error(`Property 'countries' is required`);
     }
 
-    config.as = config.as ?? 'name'
+    config.as = config.as ?? 'name';
 
     super(config);
 
-    this.countries = getGeography(this.config.countries)
+    if (typeof this.config.countries === 'string') {
+      this.countries = getGeography(this.config.countries);
+    } else if (Array.isArray(this.config.countries)) {
+      const countries: Country[] = [];
+
+      this.config.countries.forEach((geography: string) => {
+        getGeography(geography).forEach((c) => countries.push(c));
+      });
+
+      this.countries = [...new Set(countries)];
+    } else {
+      throw new Error(
+        `Unexpected type of countries specification: ` +
+        `'${this.config.countries}'`
+      )
+    }
   }
 
   get = () => {
     const country: Country = randomItemFromArray(this.countries);
 
     switch (this.config.as) {
-      case 'object': return country
-      case 'name': return country.name
-      case 'abbr': return country.abbr
-      case 'capital': return country.capital
+      case 'object':
+        return country;
+      case 'name':
+        return country.name;
+      case 'abbr':
+        return country.abbr;
+      case 'capital':
+        return country.capital;
 
       default:
-        throw new Error(`Unknown type of country property: '${this.config.as}'`)
+        throw new Error(`Unknown type of country property: '${this.config.as}'`);
     }
-  }
+  };
 }
