@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  # On push to master branch and only if the package.json has changed
+  push:
+    paths:
+      - package.json
+    branches:
+      - master
+
+env:
+  NODE_VERSION: 20
+  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+jobs:
+  release:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Unit tests
+        run: npm run test:unit
+
+      - name: Link from root project
+        run: npm link
+
+      - name: Install dependencies in nested project
+        run: npm install
+        working-directory: ./integration
+
+      - name: Link to nested project
+        run: npm link @falbricate/geography
+        working-directory: ./integration
+
+      - name: Run Integration tests
+        run: npm run test:integration
+
+      - name: Compile
+        run: npm run compile
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ env.NPM_AUTH_TOKEN }}
