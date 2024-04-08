@@ -1,0 +1,37 @@
+{
+  "name": "@falbricate/geography",
+  "version": "1.0.0",
+  "description": "Geographical data plugin for Falbricate",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "author": "vojtechpavlu",
+  "license": "MIT",
+  "keywords": [
+    "mocking",
+    "falrbicate",
+    "geography"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "cleanup": "npm run clear && npm run format",
+    "clear": "rimraf ./dist",
+    "compile": "tsc",
+    "dev": "ts-node src/index.ts",
+    "format": "prettier . --write",
+    "test:unit": "jest --config unit-test.config.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.4"
+  },
+  "dependencies": {
+    "@falbricate/base": "^1.2.12"
+  }
+}

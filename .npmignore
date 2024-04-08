@@ -1,0 +1,14 @@
+.git
+.github
+.idea
+.gitignore
+.npmignore
+.npmrc
+node_modules
+src
+test
+.prettierrc
+unit-test.config.js
+tsconfig.json
+tsup.config.ts
+docs
