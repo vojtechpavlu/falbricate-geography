@@ -5,5 +5,5 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   modulePathIgnorePatterns: ['<rootDir>/integration'],
-  resetModules: true
+  resetModules: true,
 };

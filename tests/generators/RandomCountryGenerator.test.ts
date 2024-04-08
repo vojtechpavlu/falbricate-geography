@@ -1,24 +1,28 @@
-import { Country, RandomCountryConfig, RandomCountryGenerator } from '../../src';
+import {
+  Country,
+  RandomCountryConfig,
+  RandomCountryGenerator,
+} from '../../src';
 
 describe('Random Country Generator', () => {
   it('should return a single country when region given', () => {
     const generator = new RandomCountryGenerator({
       countries: 'eu',
-      as: 'object'
-    })
+      as: 'object',
+    });
 
     const country = generator.get() as Country;
 
     expect(Array.isArray(country)).toBe(false);
     expect(country).not.toBeUndefined();
-    expect(country.type).toBe('country')
+    expect(country.type).toBe('country');
   });
 
   it('should return the country when single country given', () => {
     const generator = new RandomCountryGenerator({
       countries: 'no',
-      as: 'object'
-    })
+      as: 'object',
+    });
 
     const country = generator.get() as Country;
 
@@ -31,8 +35,8 @@ describe('Random Country Generator', () => {
   it('should return name of the country', () => {
     const generator = new RandomCountryGenerator({
       countries: 'no',
-      as: 'name'
-    })
+      as: 'name',
+    });
 
     const country = generator.get() as Country;
     expect(country).toBe('Norway');
@@ -41,8 +45,8 @@ describe('Random Country Generator', () => {
   it('should return abbreviation of the country', () => {
     const generator = new RandomCountryGenerator({
       countries: 'no',
-      as: 'abbr'
-    })
+      as: 'abbr',
+    });
 
     const country = generator.get() as Country;
     expect(country).toBe('no');
@@ -51,8 +55,8 @@ describe('Random Country Generator', () => {
   it('should return capital of the country', () => {
     const generator = new RandomCountryGenerator({
       countries: 'no',
-      as: 'capital'
-    })
+      as: 'capital',
+    });
 
     const country = generator.get() as Country;
     expect(country).toBe('Oslo');
@@ -60,8 +64,8 @@ describe('Random Country Generator', () => {
 
   it('should return name of the country by default', () => {
     const generator = new RandomCountryGenerator({
-      countries: 'no'
-    })
+      countries: 'no',
+    });
 
     const country = generator.get() as Country;
     expect(country).toBe('Norway');
@@ -70,10 +74,10 @@ describe('Random Country Generator', () => {
   it('should return a country from given list', () => {
     const config: RandomCountryConfig = {
       countries: ['no', 'se'],
-      as: 'abbr'
-    }
+      as: 'abbr',
+    };
 
-    const generator = new RandomCountryGenerator(config)
+    const generator = new RandomCountryGenerator(config);
 
     const country = generator.get() as Country;
     expect(config.countries).toContain(country);

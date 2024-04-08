@@ -26,7 +26,7 @@ describe('getGeography function', () => {
       type: 'country',
       name: 'Gondor',
       capital: 'Minas Tirith',
-      abbr: 'gndr'
+      abbr: 'gndr',
     };
 
     addGeography(country);
@@ -38,16 +38,26 @@ describe('getGeography function', () => {
 
   it('should be able to add another region', () => {
     const countries: Country[] = [
-      { type: 'country', name: 'Gondor', capital: 'Minas Tirith', abbr: 'gondor' },
+      {
+        type: 'country',
+        name: 'Gondor',
+        capital: 'Minas Tirith',
+        abbr: 'gondor',
+      },
       { type: 'country', name: 'Rohan', capital: 'Edoras', abbr: 'rohan' },
-      { type: 'country', name: 'Rivendell', capital: 'Rivendell', abbr: 'rivendell' }
+      {
+        type: 'country',
+        name: 'Rivendell',
+        capital: 'Rivendell',
+        abbr: 'rivendell',
+      },
     ];
 
     const middleEarth: Region = {
       type: 'region',
       abbr: 'middle-earth-region',
       name: 'Middle Earth',
-      subs: ['gondor', 'rohan', 'rivendell']
+      subs: ['gondor', 'rohan', 'rivendell'],
     };
 
     countries.forEach((c) => addGeography(c));

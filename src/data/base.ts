@@ -9,7 +9,7 @@ export type NamedGeography = {
   type: GeographyType;
   name: string;
   abbr: string;
-}
+};
 
 /** Declaration of regions and groups */
 export interface Region extends NamedGeography {

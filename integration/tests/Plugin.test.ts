@@ -1,4 +1,8 @@
-import { getStandard, getValueGenerator, registerPlugin } from '@falbricate/base';
+import {
+  getStandard,
+  getValueGenerator,
+  registerPlugin,
+} from '@falbricate/base';
 import { GeographyPlugin } from '../../src';
 
 describe('Not failing Plugin registration', () => {
@@ -10,7 +14,7 @@ describe('Not failing Plugin registration', () => {
 describe('Registering contents', () => {
   it('should register Random Country Generator', () => {
     const config = {
-      countries: ['no', 'it']
+      countries: ['no', 'it'],
     };
 
     expect(() => getValueGenerator('random-country', config)).not.toThrow();
@@ -20,4 +24,3 @@ describe('Registering contents', () => {
     expect(() => getStandard('country-abbr-eu')).not.toThrow();
   });
 });
-
