@@ -1,3 +1,5 @@
+import { Language } from './languages/base';
+
 /** Type of geographical element */
 export type GeographyType = 'country' | 'region';
 
@@ -19,6 +21,7 @@ export interface Region extends NamedGeography {
 /** Declaration of single countries */
 export interface Country extends NamedGeography {
   capital: string;
+  languages: Language[];
 }
 
 /** Declaration of a geography element being either Region or Country. */
